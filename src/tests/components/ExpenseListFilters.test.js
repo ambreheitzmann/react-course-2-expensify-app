@@ -38,3 +38,5 @@ beforeEach(() => {
     expect(wrapper).toMatchSnapshot();
 
   });
+
+  

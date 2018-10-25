@@ -56,7 +56,7 @@ export class ExpenseListFilters extends React.Component {
 
 
 
-const mapDispatchToProps = (dispatch, props) => ({
+const mapDispatchToProps = (dispatch) => ({
   setTextFilter: (data) => dispatch(setTextFilter(data)),
   sortByDate: (data) => dispatch(sortByDate(data)),
   sortByAmount: (data) => dispatch(sortByAmount(data)),

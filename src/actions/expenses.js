@@ -2,6 +2,7 @@ import uuid from 'uuid';
 import database from '../firebase/firebase';
 
 // ADD_EXPENSE
+
 export const addExpense = (expense) => ({
   type: 'ADD_EXPENSE',
   expense
@@ -32,6 +33,20 @@ export const removeExpense = ({ id } = {}) => ({
   id
 });
 
+
+export const startRemoveExpense = ({ id }) => {
+  return (dispatch) => {
+
+    return database.ref(`expenses/${id}`).remove().then(() => {
+      console.log('Data was removed');
+      return dispatch(removeExpense({ id }));
+    }).catch((e) => {
+      console.log('Did not remove data', e);
+    });
+  };
+};
+
+
 // EDIT_EXPENSE
 export const editExpense = (id, updates) => ({
   type: 'EDIT_EXPENSE',
@@ -46,8 +61,6 @@ export const setExpenses = (expenses) => ({
   expenses
 });
 
-
-
 export const startSetExpenses = () => {
   return (dispatch) => {
 
@@ -60,12 +73,8 @@ export const startSetExpenses = () => {
           ...childSnapshot.val()
         });
       });
-
-
       return dispatch(setExpenses(expenses));
     });
-      
-      
-      
   };
 };
+

@@ -38,10 +38,7 @@ export const startRemoveExpense = ({ id }) => {
   return (dispatch) => {
 
     return database.ref(`expenses/${id}`).remove().then(() => {
-      console.log('Data was removed');
       return dispatch(removeExpense({ id }));
-    }).catch((e) => {
-      console.log('Did not remove data', e);
     });
   };
 };
@@ -53,6 +50,19 @@ export const editExpense = (id, updates) => ({
   id,
   updates
 });
+
+
+export const startEditExpense = (id, updates) => {
+  console.log(id);
+  console.log(updates);
+
+  return (dispatch) => {
+    return database.ref(`expenses/${id}`).set(updates).then(() => {
+      return dispatch(editExpense(id, updates ));
+    });
+  };
+};
+
 
 // SET EXPENSE
 
